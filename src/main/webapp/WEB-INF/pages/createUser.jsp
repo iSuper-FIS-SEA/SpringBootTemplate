@@ -10,9 +10,10 @@
  </head>
  <body>
    <h2>User Form</h2>
-      <form:form method="POST" action="user/save">
+      <form:form method="POST" action="user/save" enctype="multipart/form-data">
           Name: <input type="text" name="name"><br />
           Email: <input type="text" name="email"><br />
+          image upload: <input type="file" name="imagefile"><br />
           <input type="submit" value="Create">
       </form:form>
  </body>
