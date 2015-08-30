@@ -11,16 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping(value="/user")
 public class UserController {
 
   @Autowired
   private UserDao _userDao;
 
-  @RequestMapping(value="/delete")
+  @RequestMapping(value="/deleteUser")
   @ResponseBody
   public String delete(long id) {
     try {
@@ -33,21 +33,21 @@ public class UserController {
     return "User succesfully deleted!";
   }
 
-  @RequestMapping(value="/get-by-email")
+  @RequestMapping(value="/getByEmailUser", method = RequestMethod.GET)
   @ResponseBody
-  public String getByEmail(String email) {
-    String userId;
+  public ModelAndView getByEmail(String email) {
+    String username = null;
+    User user = null;
     try {
-      User user = _userDao.getByEmail(email);
-      userId = String.valueOf(user.getId());
+      user = _userDao.getByEmail(email);
     }
     catch(Exception ex) {
-      return "User not found";
+      System.out.print("User not found");
     }
-    return "The user id is: " + userId;
+    return new ModelAndView("userView").addObject("user", user);
   }
 
-  @RequestMapping(value="/save", method = RequestMethod.POST)
+  @RequestMapping(value="/saveUser", method = RequestMethod.POST)
   @ResponseBody
   public String create(HttpServletRequest request, String email, String name, MultipartFile imagefile) {
     try {

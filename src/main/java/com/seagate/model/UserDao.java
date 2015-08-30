@@ -42,10 +42,6 @@ public class UserDao {
         .uniqueResult();
   }
 
-  public User getById(long id) {
-    return (User) getSession().load(User.class, id);
-  }
-
   public void update(User user) {
     getSession().update(user);
     return;

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import com.seagate.model.User;
 
 @Controller
 public class HomeController {
@@ -17,4 +18,10 @@ public class HomeController {
  public String homeUser() {
   return "createUser";
  }
+
+ @RequestMapping(value = "/userV", method = RequestMethod.GET)
+ public ModelAndView userview() {
+  return new ModelAndView("userView").addObject("user", new User());
+ }
+
 }
