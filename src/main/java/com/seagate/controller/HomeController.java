@@ -13,4 +13,8 @@ public class HomeController {
   return new ModelAndView("home").addObject("name", "Jirapin");
  }
 
+ @RequestMapping(value = "/homeUser", method = RequestMethod.GET)
+ public String homeUser() {
+  return "createUser";
+ }
 }
